@@ -1,14 +1,14 @@
 :root {
-  --bg: #0b0e14;
-  --bg-elev: #131824;
-  --bg-card: #1a2130;
-  --border: #232c3f;
-  --text: #e6ebf5;
-  --text-dim: #8b95ab;
-  --accent: #6c8cff;
-  --red: #ff5d6c;
-  --amber: #ffb454;
-  --green: #3ddc97;
+  --bg: #f4f6f9;
+  --bg-elev: #ffffff;
+  --bg-card: #f0f2f5;
+  --border: #d8dce4;
+  --text: #1e2530;
+  --text-dim: #6b7588;
+  --accent: #4f6be6;
+  --red: #e04050;
+  --amber: #d88c1a;
+  --green: #1a9c5a;
   --radius: 12px;
 }
 
@@ -41,7 +41,7 @@ body {
 .banner {
   padding: 14px 18px; border-radius: var(--radius); margin-bottom: 18px;
 }
-.error-banner { background: #2a1219; border: 1px solid #55202c; color: #ff9aa5; }
+.error-banner { background: #fef0f1; border: 1px solid #f3c0c5; color: #b32536; }
 
 /* ── Summary cards ───────────────────────────── */
 .cards {
@@ -60,6 +60,21 @@ body {
 .stat.due-soon .num { color: var(--amber); }
 .stat.soon24 .num { color: var(--amber); }
 
+/* ── Layout: sidebar + content ───────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.sidebar {
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+.sidebar-panel { border-color: rgba(224, 64, 80, 0.4); }
+
 /* ── Panels ──────────────────────────────────── */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .panel.wide { grid-column: 1 / -1; }
@@ -70,7 +85,7 @@ body {
 .panel h2 { margin: 0 0 14px; font-size: 1.05rem; }
 .panel .hint { color: var(--text-dim); font-size: 0.72rem; font-weight: 400; }
 .empty { color: var(--text-dim); font-style: italic; }
-.danger-panel { border-color: rgba(255, 93, 108, 0.35); }
+.danger-panel { border-color: rgba(224, 64, 80, 0.35); }
 
 .spinner { color: var(--text-dim); padding: 40px; text-align: center; }
 
@@ -86,7 +101,7 @@ body {
 }
 .task-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 .overdue-card { border-left-color: var(--red); }
 .overdue-card:hover { border-color: var(--red); border-left-color: var(--red); }
@@ -96,10 +111,10 @@ body {
 .task-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .task-name { font-weight: 600; font-size: 0.95rem; }
 .prio { font-size: 0.68rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
-.prio.p1 { background: #3a1017; color: #ff8090; }
-.prio.p2 { background: #33230c; color: #ffc46b; }
-.prio.p3 { background: #14243a; color: #7ea4ff; }
-.prio.p4 { background: #17251c; color: #63d9a4; }
+.prio.p1 { background: #fde8ea; color: #c0252e; }
+.prio.p2 { background: #fdf0da; color: #a06b10; }
+.prio.p3 { background: #e4ecff; color: #3b5ccc; }
+.prio.p4 { background: #e2f6ec; color: #157a44; }
 
 .task-bottom { display: flex; justify-content: space-between; font-size: 0.8rem; }
 .assignees { color: var(--text-dim); }
@@ -118,14 +133,14 @@ body {
 .dev-card h3 { margin: 0 0 10px; font-size: 0.95rem; }
 .dev-stats { display: flex; gap: 8px; flex-wrap: wrap; }
 .pill { font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; }
-.pill.ok { background: #12271e; color: var(--green); }
-.pill.wait { background: #14243a; color: var(--accent); }
-.pill.bad { background: #2a1219; color: var(--red); }
+.pill.ok { background: #e2f6ec; color: var(--green); }
+.pill.wait { background: #e4ecff; color: var(--accent); }
+.pill.bad { background: #fde8ea; color: var(--red); }
 
 /* ── Modal ───────────────────────────────────── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 100;
-  background: rgba(4, 6, 10, 0.72); backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px);
   display: flex; align-items: center; justify-content: center; padding: 20px;
   animation: fadein 0.15s ease-out;
 }
@@ -152,8 +167,8 @@ body {
 }
 .detail-row .label { min-width: 90px; color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .status-chip { padding: 3px 12px; border-radius: 999px; font-weight: 600; font-size: 0.78rem; }
-.s-done { background: #12271e; color: var(--green); }
-.s-open { background: #2a1219; color: var(--red); }
+.s-done { background: #e2f6ec; color: var(--green); }
+.s-open { background: #fde8ea; color: var(--red); }
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { background: var(--bg-card); border: 1px solid var(--border); padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; }
 
@@ -174,7 +189,7 @@ body {
   width: 58px; height: 58px; border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), #9b6cff);
   border: none; font-size: 1.5rem; cursor: pointer;
-  box-shadow: 0 8px 24px rgba(108, 140, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(79, 107, 230, 0.35);
   transition: transform 0.15s;
 }
 .chat-fab:hover { transform: scale(1.08); }
@@ -184,7 +199,7 @@ body {
   width: 380px; height: 520px; max-height: calc(100vh - 130px);
   background: var(--bg-elev); border: 1px solid var(--border);
   border-radius: 16px; display: flex; flex-direction: column;
-  overflow: hidden; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  overflow: hidden; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
   animation: pop 0.18s ease-out;
 }
 .chat-head {
@@ -200,6 +215,13 @@ body {
 }
 .msg.user { align-self: flex-end; background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
 .msg.agent { align-self: flex-start; background: var(--bg-card); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg.agent .chat-link-btn {
+  display: inline-block; margin-top: 8px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+  transition: filter 0.15s;
+}
+.msg.agent .chat-link-btn:hover { filter: brightness(1.1); }
 .typing span { animation: blink 1.2s infinite; }
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
@@ -218,6 +240,10 @@ body {
 .chat-input button:disabled { opacity: 0.45; cursor: default; }
 
 /* ── Responsive ──────────────────────────────── */
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: none; }
+}
 @media (max-width: 900px) {
   .cards { grid-template-columns: repeat(3, 1fr); }
   .grid { grid-template-columns: 1fr; }

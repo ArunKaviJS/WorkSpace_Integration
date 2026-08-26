@@ -43,6 +43,15 @@ def _put(endpoint: str, payload: dict) -> Any:
     return resp.json()
 
 
+def _delete(endpoint: str) -> Any:
+    url = f"{CLICKUP_BASE_URL}/{endpoint.lstrip('/')}"
+    resp = requests.delete(url, headers=CLICKUP_HEADERS, timeout=30)
+    resp.raise_for_status()
+    if resp.content:
+        return resp.json()
+    return {}
+
+
 def _fmt_task(t: dict) -> dict:
     """Normalise a raw ClickUp task object."""
     assignees = [a.get("username") for a in t.get("assignees", [])]
@@ -249,3 +258,57 @@ def update_task(task_id: str, fields: dict) -> dict:
     """
     data = _put(f"/task/{task_id}", fields)
     return _fmt_task(data)
+
+
+def delete_task(task_id: str) -> dict:
+    """
+    TOOL: delete_task
+    Permanently delete a task or subtask by its ID.
+    (The agent should confirm with the user before calling this.)
+
+    Parameters
+    ----------
+    task_id : str
+    """
+    _delete(f"/task/{task_id}")
+    return {"deleted": True, "task_id": task_id}
+
+
+def get_list_custom_fields(list_id: str) -> list[dict]:
+    """
+    TOOL: get_list_custom_fields
+    Get all custom fields available on tasks in a list
+    (needed to discover field IDs before setting values).
+
+    Parameters
+    ----------
+    list_id : str
+    """
+    data = _get(f"/list/{list_id}/field")
+    return [
+        {
+            "id": f["id"],
+            "name": f.get("name"),
+            "type": f.get("type"),
+            "options": [
+                {"id": o["id"], "name": o["name"]}
+                for o in (f.get("type_config") or {}).get("options", [])
+            ],
+        }
+        for f in data.get("fields", [])
+    ]
+
+
+def set_custom_field(task_id: str, field_id: str, value: Any) -> dict:
+    """
+    TOOL: set_custom_field
+    Set a custom field value on a task.
+    For dropdown fields pass the option ID; for text/number pass the raw value.
+
+    Parameters
+    ----------
+    task_id  : str
+    field_id : str – discover via get_list_custom_fields
+    value    : str | int | float | list[str]
+    """
+    return _post(f"/task/{task_id}/field/{field_id}", {"value": value})

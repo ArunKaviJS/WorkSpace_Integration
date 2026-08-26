@@ -30,6 +30,7 @@ from typing import Any
 
 from agent.llm import get_llm
 from tools import TOOL_MAP, TOOL_REGISTRY
+from tools.time_utils import ist_now, resolve_relative_dates
 
 logger = logging.getLogger(__name__)
 
@@ -73,10 +74,17 @@ When you have enough information to fully answer the user, write a plain text re
 (no JSON block). That signals the end of the loop.
 
 ## Behaviour Rules
+- {ist_now()}
+- Dates in the user's message have already been resolved to concrete IST dates by code.
+  When the user says "tomorrow", you will see "tomorrow (Wednesday, 27 August 2026)".
+  Use the concrete date for any due_date_epoch_ms calculations.
 - Always resolve workspace hierarchy top-down: workspace → space → folder → list → task.
 - When creating tasks, first call get_workspaces, then navigate to the correct list.
+- Before assigning a task by human name, call resolve_assignees to get user IDs.
 - When asked for a dashboard, call get_team_tasks → classify_tasks → build_dashboard → render_dashboard_text.
-- Never guess IDs — always fetch them from the API first.
+- NEVER call delete_task without explicit user confirmation of the exact task ID.
+- Never guess IDs — always fetch them from the API first (use search_workspace or
+  get_workspace_hierarchy when the user refers to items by name).
 - Be concise and professional in final replies.
 """
 
@@ -147,6 +155,7 @@ class Orchestrator:
         Run the Observe → Think → Act loop for a single user message.
         Returns the final assistant reply.
         """
+        user_message = resolve_relative_dates(user_message)
         logger.info("User: %s", user_message)
         self.history.append({"role": "user", "content": user_message})
 

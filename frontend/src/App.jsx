@@ -63,55 +63,59 @@ export default function App() {
       {loading && !dash && <div className="spinner">Fetching workspace data…</div>}
 
       {dash && (
-        <main className="grid">
-          <section id="overdue-sec" className="panel danger-panel">
-            <h2>🚨 Overdue Tasks <span className="hint">(click a task for details)</span></h2>
-            {(dash.overdue_tasks?.length ?? 0) === 0 && (
-              <p className="empty">Nothing overdue. Nice work! 🎉</p>
-            )}
-            <div className="task-list">
-              {dash.overdue_tasks?.map((t) => (
-                <TaskCard key={t.id} task={t} variant="overdue-card" onClick={setSelected} />
-              ))}
-            </div>
-          </section>
+        <div className="layout">
+          <aside className="sidebar">
+            <section id="overdue-sec" className="panel danger-panel sidebar-panel">
+              <h2>🚨 Overdue Tasks <span className="hint">(click for details)</span></h2>
+              {(dash.overdue_tasks?.length ?? 0) === 0 && (
+                <p className="empty">Nothing overdue. Nice work! 🎉</p>
+              )}
+              <div className="task-list">
+                {dash.overdue_tasks?.map((t) => (
+                  <TaskCard key={t.id} task={t} variant="overdue-card" onClick={setSelected} />
+                ))}
+              </div>
+            </section>
+          </aside>
 
-          <section className="panel">
-            <h2>⚠️ Due in 5 Minutes</h2>
-            {(dash.due_soon_5min?.length ?? 0) === 0 && <p className="empty">No imminent deadlines.</p>}
-            <div className="task-list">
-              {dash.due_soon_5min?.map((t) => (
-                <TaskCard key={t.id} task={t} variant="soon-card" onClick={setSelected} />
-              ))}
-            </div>
-          </section>
+          <main className="grid">
+            <section className="panel">
+              <h2>⚠️ Due in 5 Minutes</h2>
+              {(dash.due_soon_5min?.length ?? 0) === 0 && <p className="empty">No imminent deadlines.</p>}
+              <div className="task-list">
+                {dash.due_soon_5min?.map((t) => (
+                  <TaskCard key={t.id} task={t} variant="soon-card" onClick={setSelected} />
+                ))}
+              </div>
+            </section>
 
-          <section className="panel wide">
-            <h2>⏳ Due Next 24 Hours</h2>
-            {(dash.upcoming_24h?.length ?? 0) === 0 && <p className="empty">Nothing due in the next day.</p>}
-            <div className="task-list">
-              {dash.upcoming_24h?.map((t) => (
-                <TaskCard key={t.id} task={t} variant="upcoming-card" onClick={setSelected} />
-              ))}
-            </div>
-          </section>
+            <section className="panel">
+              <h2>⏳ Due Next 24 Hours</h2>
+              {(dash.upcoming_24h?.length ?? 0) === 0 && <p className="empty">Nothing due in the next day.</p>}
+              <div className="task-list">
+                {dash.upcoming_24h?.map((t) => (
+                  <TaskCard key={t.id} task={t} variant="upcoming-card" onClick={setSelected} />
+                ))}
+              </div>
+            </section>
 
-          <section className="panel wide">
-            <h2>👥 Per-Developer Breakdown</h2>
-            <div className="dev-grid">
-              {Object.entries(dash.per_developer || {}).map(([dev, st]) => (
-                <div key={dev} className="dev-card">
-                  <h3>{dev}</h3>
-                  <div className="dev-stats">
-                    <span className="pill ok">✅ {st.completed.length}</span>
-                    <span className="pill wait">⏳ {st.pending.length}</span>
-                    <span className="pill bad">🚨 {st.overdue.length}</span>
+            <section className="panel wide">
+              <h2>👥 Per-Developer Breakdown</h2>
+              <div className="dev-grid">
+                {Object.entries(dash.per_developer || {}).map(([dev, st]) => (
+                  <div key={dev} className="dev-card">
+                    <h3>{dev}</h3>
+                    <div className="dev-stats">
+                      <span className="pill ok">✅ {st.completed.length}</span>
+                      <span className="pill wait">⏳ {st.pending.length}</span>
+                      <span className="pill bad">🚨 {st.overdue.length}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </main>
+                ))}
+              </div>
+            </section>
+          </main>
+        </div>
       )}
 
       <TaskModal task={selected} onClose={() => setSelected(null)} />

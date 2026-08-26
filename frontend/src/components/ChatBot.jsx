@@ -1,6 +1,37 @@
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../api.js'
 
+function parseLinks(text) {
+  const parts = []
+  const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g
+  let last = 0
+  let m
+  while ((m = re.exec(text))) {
+    if (m.index > last) parts.push({ type: 'text', value: text.slice(last, m.index) })
+    parts.push({ type: 'link', label: m[1], href: m[2] })
+    last = re.lastIndex
+  }
+  if (last < text.length) parts.push({ type: 'text', value: text.slice(last) })
+  return parts.length ? parts : [{ type: 'text', value: text }]
+}
+
+function ChatMessage({ text }) {
+  const parts = parseLinks(text)
+  return (
+    <>
+      {parts.map((p, i) =>
+        p.type === 'link' ? (
+          <a key={i} className="chat-link-btn" href={p.href} target="_blank" rel="noreferrer">
+            🔗 {p.label}
+          </a>
+        ) : (
+          <span key={i}>{p.value}</span>
+        )
+      )}
+    </>
+  )
+}
+
 export default function ChatBot({ open, onToggle }) {
   const [messages, setMessages] = useState([
     {
@@ -55,7 +86,7 @@ export default function ChatBot({ open, onToggle }) {
           <div className="chat-msgs" ref={listRef}>
             {messages.map((m, i) => (
               <div key={i} className={`msg ${m.role}`}>
-                {m.text}
+                <ChatMessage text={m.text} />
               </div>
             ))}
             {busy && (
