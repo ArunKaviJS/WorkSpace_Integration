@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-08-26 11:30:23 UTC",
+  "summary": {
+    "total": 71,
+    "completed": 0,
+    "pending": 70,
+    "overdue": 1,
+    "due_soon_5min": 0,
+    "upcoming_24h": 1
+  },
+  "per_developer": {
+    "unassigned": {
+      "completed": [],
+      "pending": [
+        "Task 1",
+        "Task 2",
+        "Task 3",
+        "\u200eTask 2",
+        "Task 3",
+        "\u200eTask 1",
+        "Extraction Pipeline Migrating to lambda",
+        "MongoDB Storage \u2013 Store Extracted Documents",
+        "Integration Testing of Extraction Pipeline",
+        "Fetch Extracted JSON",
+        "Validation Engine",
+        "Machine and Document Subgraph Builder",
+        "RAG Subgraph Builder + MongoDB Update",
+        "Graph Validation",
+        "Agentic Graph Refinement + Fine-tuning",
+        "MongoDB Graph Storage",
+        "Query API from MongoDB",
+        "User Context Fetching from Database",
+        "JSON Generation and Standardization",
+        "Fine-tuning Extraction Models (OCR, Parsing, Classification)",
+        "Multi-Agent Extraction Orchestration",
+        "PDF Upload Service (File System + Cron Job)",
+        "Ollama, Extraction & Construction, Retrieval Pods + LLM Inference & Intercommunication Setup",
+        "Prompt Builder + Agentic Query Generator",
+        "Subgraph Retrieval + Optimal Search",
+        "Agentic Graph Validation with Feedback Loop",
+        "Response Generator with Optimization",
+        "Evaluation and Benchmarking",
+        "Create and configure an AWS EC2 instance",
+        "EC2\u2013Local Environment Connection",
+        "Code for EC2\u2013Local Environment Connectivity",
+        "Review the existing pipeline",
+        "Create a Docker image for the existing pipeline",
+        "EC2 to Local Environment Connection",
+        "Conduct R&D on local models for bounding box detection",
+        "Existing pipeline - Extraction Phase",
+        "Agent Architecture Review",
+        "Evaluate the Qwen 2.5 VL 7B local OCR model.",
+        "Agent 07 - Section Identification Agent",
+        "Agent 20 - Global Validation Agent",
+        "Agent 06 - Reading Order Agent",
+        "Agent 19 - Metadata Fusion & JSON Appending Agent",
+        "Agent 05 - Layout Detection Agent",
+        "Agent 18 - Confidence Scoring Agent",
+        "Agent 04 - Image Enhancement Agent",
+        "Agent 17 - Hallucination Detection Agent",
+        "Agent 16 - Text Summarization Agent",
+        "Agent 15 - Abbreviation Resolution Agent",
+        "Agent 03 - OCR Quality Assessment Agent",
+        "Agent 14 - Entity Extraction Agent",
+        "Agent 13 - Cross-Reference Validation Agent",
+        "Agent 12 - Internal Citation Extraction Agent",
+        "Agent 11 - Equation Analysis Agent",
+        "Agent 10 - Figure Understanding Agent",
+        "Agent 09 - Table Analysis Agent",
+        "Agent 02 - Document Classification Agent",
+        "Agent 01 - Router Agent",
+        "Agent 08 - Context Memory Agent",
+        "Set up Pod 1 (Construction, Retrieval) & Pod 3 (Memgraph Docker)",
+        "Retry Mechanism for Failed Document Extractions",
+        "Agents require fine-tuning",
+        "BODHI Endpoint",
+        "MongoDB Pod Deployment (Existing Schema)",
+        "Environment Validation",
+        "Kubernetes Cluster Setup"
+      ],
+      "overdue": [],
+      "due_soon": []
+    },
+    "Arun Approlabs": {
+      "completed": [],
+      "pending": [
+        "\ud83e\udde0 Work Smarter with ClickUp AI",
+        "\ud83d\udd17 Integrate Your Favorite Tools in ClickUp",
+        "\ud83d\udce5 Import Your Work into ClickUp",
+        "\ud83c\udfa8 Design a Workflow That Works for You",
+        "\ud83e\udd1d Bring Your Team Onboard in Minutes"
+      ],
+      "overdue": [
+        "\ud83d\ude80 Set up Your Tasks in Just 5 Minutes"
+      ],
+      "due_soon": []
+    }
+  },
+  "upcoming_24h": [
+    {
+      "id": "86d453hqy",
+      "name": "\ud83c\udfa8 Design a Workflow That Works for You",
+      "assignees": [
+        "Arun Approlabs"
+      ],
+      "due_in_minutes": 1318.6,
+      "url": "https://app.clickup.com/t/86d453hqy"
+    }
+  ],
+  "overdue_tasks": [
+    {
+      "id": "86d453hqw",
+      "name": "\ud83d\ude80 Set up Your Tasks in Just 5 Minutes",
+      "assignees": [
+        "Arun Approlabs"
+      ],
+      "url": "https://app.clickup.com/t/86d453hqw"
+    }
+  ],
+  "due_soon_5min": []
+}
