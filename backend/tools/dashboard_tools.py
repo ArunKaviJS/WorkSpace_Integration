@@ -42,10 +42,25 @@ def build_dashboard(classified: dict, member_map: dict[str, str] | None = None) 
 
     # Tasks due in the next 24 hours
     upcoming_24h = [
-        t
+        dict(t)
         for t in classified.get("pending", [])
         if t.get("due_date_epoch") and 0 < (t["due_date_epoch"] - now) <= 86400
     ]
+    for t in upcoming_24h:
+        t["due_in_minutes"] = round((t["due_date_epoch"] - now) / 60, 1)
+    upcoming_24h.sort(key=lambda x: x["due_date_epoch"])
+
+    overdue_full = [dict(t) for t in classified.get("overdue", [])]
+    for t in overdue_full:
+        t["minutes_overdue"] = (
+            round((now - t["due_date_epoch"]) / 60, 1) if t.get("due_date_epoch") else None
+        )
+
+    due_soon_full = [dict(t) for t in classified.get("due_soon_5min", [])]
+    for t in due_soon_full:
+        t["seconds_remaining"] = (
+            round(t["due_date_epoch"] - now, 0) if t.get("due_date_epoch") else None
+        )
 
     return {
         "generated_at": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
@@ -58,30 +73,9 @@ def build_dashboard(classified: dict, member_map: dict[str, str] | None = None) 
             "upcoming_24h": len(upcoming_24h),
         },
         "per_developer": dict(dev_stats),
-        "upcoming_24h": [
-            {
-                "id": t["id"],
-                "name": t["name"],
-                "assignees": t.get("assignees"),
-                "due_in_minutes": round((t["due_date_epoch"] - now) / 60, 1),
-                "url": t.get("url"),
-            }
-            for t in sorted(upcoming_24h, key=lambda x: x["due_date_epoch"])
-        ],
-        "overdue_tasks": [
-            {"id": t["id"], "name": t["name"], "assignees": t.get("assignees"), "url": t.get("url")}
-            for t in classified.get("overdue", [])
-        ],
-        "due_soon_5min": [
-            {
-                "id": t["id"],
-                "name": t["name"],
-                "assignees": t.get("assignees"),
-                "seconds_remaining": round(t["due_date_epoch"] - now, 0) if t.get("due_date_epoch") else None,
-                "url": t.get("url"),
-            }
-            for t in classified.get("due_soon_5min", [])
-        ],
+        "upcoming_24h": upcoming_24h,
+        "overdue_tasks": overdue_full,
+        "due_soon_5min": due_soon_full,
     }
 
 

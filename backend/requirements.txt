@@ -2,3 +2,5 @@ boto3
 botocore
 requests
 python-dotenv
+fastapi
+uvicorn[standard]

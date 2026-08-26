@@ -1,4 +1,7 @@
 venv/
+backend/venv/
 .env
 __pycache__/
 dashboard_snapshot.json
+node_modules/
+dist/
