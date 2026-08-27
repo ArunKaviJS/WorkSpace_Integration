@@ -21,6 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from agent.orchestrator import Orchestrator
+from bitbucket.bitbucket_routes import router as bitbucket_router
 from dashboard.live_dashboard import gather_all_tasks
 from tools.dashboard_tools import build_dashboard, render_dashboard_text
 from tools.task_tools import classify_tasks
@@ -39,6 +40,9 @@ app.add_middleware(
 )
 
 orch = Orchestrator()
+
+# Bitbucket routes (separate module — mounted alongside ClickUp routes)
+app.include_router(bitbucket_router)
 
 
 # ---------------------------------------------------------------------------

@@ -5,3 +5,5 @@ __pycache__/
 dashboard_snapshot.json
 node_modules/
 dist/
+frontend_dev.err.log
+frontend_dev.log
