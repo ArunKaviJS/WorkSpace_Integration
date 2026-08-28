@@ -323,3 +323,225 @@ def get_latest_commits(repo_slug: str = "", workspace: str = "", limit: int = 10
         if len(commits) >= limit:
             break
     return commits[:limit]
+
+
+# ---------------------------------------------------------------------------
+# bitbucket_* tools (exact names requested by the agent spec)
+# ---------------------------------------------------------------------------
+
+
+def bitbucket_repo_list(workspace: str = "") -> dict:
+    """
+    TOOL: bitbucket_repo_list
+    List all repositories in a workspace. Scope: read:repository:bitbucket.
+
+    Parameters
+    ----------
+    workspace : str – workspace slug (defaults to BITBUCKET_WORKSPACE)
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET /repositories/{workspace}).
+    """
+    ws = workspace or _workspace()
+    data = _get(f"/repositories/{ws}", {"pagelen": 100})
+    return data
+
+
+def bitbucket_repo_get(repo_slug: str, workspace: str = "") -> dict:
+    """
+    TOOL: bitbucket_repo_get
+    Get details for a single repository. Scope: read:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug : str
+    workspace : str
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET /repositories/{ws}/{repo_slug}).
+    """
+    ws = workspace or _workspace()
+    return _get(f"/repositories/{ws}/{repo_slug}")
+
+
+def bitbucket_repo_default_reviewers(repo_slug: str, workspace: str = "") -> dict:
+    """
+    TOOL: bitbucket_repo_default_reviewers
+    Get the default reviewers configured for a repository. Scope: read:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug : str
+    workspace : str
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET .../default-reviewers).
+    """
+    ws = workspace or _workspace()
+    return _get(f"/repositories/{ws}/{repo_slug}/default-reviewers", {"pagelen": 100})
+
+
+def bitbucket_repo_files_get(
+    repo_slug: str,
+    path: str,
+    revision: str = "",
+    workspace: str = "",
+) -> dict:
+    """
+    TOOL: bitbucket_repo_files_get
+    Get the content of a file in a repository at a revision. Scope: read:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug : str
+    path      : str – file path in the repo, e.g. "README.md" or "src/main.py"
+    revision  : str – branch name or commit SHA; empty = default branch
+    workspace : str
+
+    Returns
+    -------
+    dict with the raw text content of the requested file.
+    """
+    from config.settings import BITBUCKET_AUTH, BITBUCKET_BASE_URL
+
+    ws = workspace or _workspace()
+    revision = revision or "HEAD"
+    url = f"/repositories/{ws}/{repo_slug}/src/{revision}/{path.lstrip('/')}"
+    resp = requests.get(
+        f"{BITBUCKET_BASE_URL}/{url}",
+        auth=BITBUCKET_AUTH,
+        headers={"Accept": "text/plain"},
+        timeout=30,
+    )
+    if not resp.ok:
+        message = str(resp.text or "").strip() or f"HTTP {resp.status_code}"
+        from bitbucket.bitbucket_http import BitbucketError
+
+        raise BitbucketError(resp.status_code, message)
+    return {"repo": f"{ws}/{repo_slug}", "path": path, "revision": revision, "content": resp.text}
+
+
+def bitbucket_repo_commit_get(
+    repo_slug: str,
+    revision: str = "",
+    workspace: str = "",
+) -> dict:
+    """
+    TOOL: bitbucket_repo_commit_get
+    Get details for a single commit (defaults to the repo default branch head).
+
+    Parameters
+    ----------
+    repo_slug : str
+    revision  : str – commit SHA or branch name; empty = default branch
+    workspace : str
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET .../commits/{revision}).
+    """
+    ws = workspace or _workspace()
+    rev = revision or "HEAD"
+    return _get(f"/repositories/{ws}/{repo_slug}/commits/{rev}")
+
+
+def bitbucket_repo_commit_create(
+    repo_slug: str,
+    file_path: str,
+    content: str,
+    message: str,
+    branch: str = "",
+    workspace: str = "",
+) -> dict:
+    """
+    TOOL: bitbucket_repo_commit_create
+    Create a commit by pushing/updating a file via the Bitbucket source-content
+    API. Scope: write:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug : str
+    file_path : str – path in the repo, e.g. "docs/api.md"
+    content   : str – new file content
+    message   : str – commit message
+    branch    : str – target branch (defaults to repo main branch)
+    workspace : str
+
+    Returns
+    -------
+    dict with the resulting commit hash.
+    """
+    ws = workspace or _workspace()
+    if not branch:
+        repo = _get(f"/repositories/{ws}/{repo_slug}")
+        branch = (repo.get("mainbranch") or {}).get("name") or "main"
+    data = _post_form(
+        f"/repositories/{ws}/{repo_slug}/src",
+        {"message": message, "branch": branch, file_path: content},
+    )
+    return {
+        "action": "bitbucket_repo_commit_create",
+        "workspace": ws,
+        "repo": repo_slug,
+        "branch": branch,
+        "file": file_path,
+        "commit_hash": data.get("hash"),
+    }
+
+
+def bitbucket_repo_branch_get(repo_slug: str, branch_name: str, workspace: str = "") -> dict:
+    """
+    TOOL: bitbucket_repo_branch_get
+    Get details for a single branch in a repository. Scope: read:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug   : str
+    branch_name : str – branch name
+    workspace   : str
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET .../refs/branches/{name}).
+    """
+    ws = workspace or _workspace()
+    return _get(f"/repositories/{ws}/{repo_slug}/refs/branches/{branch_name}")
+
+
+def bitbucket_repo_branch_create(
+    repo_slug: str,
+    branch_name: str,
+    from_commit: str = "",
+    workspace: str = "",
+) -> dict:
+    """
+    TOOL: bitbucket_repo_branch_create
+    Create a branch from a given commit SHA (or the default branch if omitted).
+    Scope: write:repository:bitbucket.
+
+    Parameters
+    ----------
+    repo_slug   : str
+    branch_name : str – new branch name
+    from_commit : str – source commit SHA
+    workspace   : str
+
+    Returns
+    -------
+    dict with the created branch name and target hash.
+    """
+    payload: dict[str, Any] = {"name": branch_name}
+    if from_commit:
+        payload["target"] = {"hash": from_commit}
+    data = _post(
+        f"/repositories/{workspace or _workspace()}/{repo_slug}/refs/branches", payload
+    )
+    return {
+        "workspace": workspace or _workspace(),
+        "repo": repo_slug,
+        "name": data.get("name"),
+        "target": (data.get("target") or {}).get("hash"),
+    }

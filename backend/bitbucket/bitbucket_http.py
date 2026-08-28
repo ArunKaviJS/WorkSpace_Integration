@@ -21,6 +21,21 @@ from config.settings import BITBUCKET_AUTH, BITBUCKET_BASE_URL, BITBUCKET_HEADER
 logger = logging.getLogger(__name__)
 
 
+class BitbucketError(requests.HTTPError):
+    """HTTP error from the Bitbucket Cloud API carrying a status code.
+
+    Subclasses ``requests.HTTPError`` so existing ``except requests.HTTPError``
+    fallbacks keep working, while also exposing ``status_code`` and ``message``
+    so the agent can emit a consistent ``{"error": true, "message": ...,
+    "status_code": ...}`` JSON response.
+    """
+
+    def __init__(self, status_code: int, message: str = "", *args: Any) -> None:
+        self.status_code = int(status_code)
+        self.message = message or f"HTTP {self.status_code} error from Bitbucket API"
+        super().__init__(self.message, *args)
+
+
 # ---------------------------------------------------------------------------
 # Shared HTTP helpers
 # ---------------------------------------------------------------------------
@@ -43,7 +58,9 @@ def _request(
         json=json_body,
         timeout=30,
     )
-    resp.raise_for_status()
+    if not resp.ok:
+        message = str(resp.text or "").strip() or f"HTTP {resp.status_code}"
+        raise BitbucketError(resp.status_code, message)
     if resp.content:
         return resp.json()
     return {}
@@ -71,7 +88,9 @@ def _post_form(endpoint: str, data: dict) -> Any:
         data=data,
         timeout=30,
     )
-    resp.raise_for_status()
+    if not resp.ok:
+        message = str(resp.text or "").strip() or f"HTTP {resp.status_code}"
+        raise BitbucketError(resp.status_code, message)
     if resp.content:
         return resp.json()
     return {}

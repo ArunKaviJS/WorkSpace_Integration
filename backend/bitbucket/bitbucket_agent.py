@@ -15,6 +15,7 @@ import re
 from typing import Any
 
 from agent.llm import get_llm
+from bitbucket.bitbucket_http import BitbucketError
 from bitbucket.bitbucket_prompts import build_bitbucket_system_prompt
 from bitbucket.bitbucket_tools import BITBUCKET_TOOL_MAP
 from tools.time_utils import resolve_relative_dates
@@ -32,12 +33,15 @@ MAX_ITERATIONS = 12  # safety cap — matches agent/orchestrator.py
 def _dispatch(tool_name: str, args: dict) -> Any:
     entry = BITBUCKET_TOOL_MAP.get(tool_name)
     if not entry:
-        return {"error": f"Unknown tool: {tool_name}"}
+        return {"error": True, "message": f"Unknown tool: {tool_name}", "status_code": 0}
     try:
         return entry["fn"](**args)
+    except BitbucketError as exc:
+        logger.error("Bitbucket tool %s failed: %s", tool_name, exc)
+        return {"error": True, "message": str(exc), "status_code": exc.status_code}
     except Exception as exc:  # noqa: BLE001
         logger.error("Bitbucket tool %s failed: %s", tool_name, exc, exc_info=True)
-        return {"error": str(exc)}
+        return {"error": True, "message": str(exc), "status_code": 0}
 
 
 # ---------------------------------------------------------------------------

@@ -91,3 +91,33 @@ def update_workspace_member_role(
         "role": role,
         "workspace": ws,
     }
+
+
+def bitbucket_workspace_list() -> dict:
+    """
+    TOOL: bitbucket_workspace_list
+    List all workspaces accessible to the authenticated user, including whether
+    the caller has admin permission on each. Scope: read:workspace:bitbucket.
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET /user/workspaces).
+    """
+    return _get("/user/workspaces")
+
+
+def bitbucket_workspace_get(workspace: str = "") -> dict:
+    """
+    TOOL: bitbucket_workspace_get
+    Get details for a single workspace (name, slug, uuid, is_private, etc.).
+
+    Parameters
+    ----------
+    workspace : str – workspace slug or UUID (defaults to BITBUCKET_WORKSPACE)
+
+    Returns
+    -------
+    Raw parsed JSON from the Bitbucket API (GET /workspaces/{workspace}).
+    """
+    ws = workspace or _workspace()
+    return _get(f"/workspaces/{ws}")

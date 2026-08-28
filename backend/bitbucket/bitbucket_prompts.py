@@ -56,7 +56,9 @@ When you have enough information to fully answer the user, write a plain text re
 ## Behaviour Rules
 - {ist_now()}
 - Human-gated tools (approve_pr, decline_pr, merge_pr, delete_repo,
-  set_branch_permission) REQUIRE confirmed=True to actually execute.
+  set_branch_permission, bitbucket_pr_approve, bitbucket_pr_decline,
+  bitbucket_pr_merge, bitbucket_environment_delete) REQUIRE confirmed=True to
+  actually execute.
   If the user asked for one of these, first ask them to confirm, then call the
   tool with confirmed=True. NEVER pass confirmed=True on your own.
 - The workspace defaults to the configured BITBUCKET_WORKSPACE. Only pass an
