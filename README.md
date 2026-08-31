@@ -1,67 +1,139 @@
-# ClickUp AI Agent
+# AI Command Center
 
-AI-powered ClickUp orchestrator using **AWS Bedrock (Claude)** as the brain and **19 purpose-built tools** to interact with the ClickUp API — no human required for task creation, classification, or dashboard reporting.
+Full-stack AI-powered developer operations hub that orchestrates **ClickUp** (project management) and **Bitbucket** (source control) through two natural-language agents backed by **AWS Bedrock (Claude Sonnet 4.6)** and **~80 purpose-built tools** — all managed from a single React web UI.
 
 ---
 
 ## Architecture
 
 ```
-User message
-    │
-    ▼
-ORCHESTRATOR LOOP  (Observe → Think → Act)
-    │
-    ├── LLM decides which tool to call (AWS Bedrock / Claude)
-    │
-    ├── TOOL CALLS (19 tools across 4 modules)
-    │       ├── workspace_tools.py   → navigate hierarchy
-    │       ├── task_tools.py        → CRUD + classify tasks
-    │       ├── comment_tools.py     → read/post comments
-    │       └── dashboard_tools.py  → build & render dashboard
-    │
-    └── Reply back to user
+React Frontend (Vite, port 5173)
+        │
+        ▼
+FastAPI Backend (port 8000)
+        │
+        ├── /api/*  ──►  ClickUp Agent (~30 tools)
+        │                   └── ClickUp REST API
+        │
+        └── /bitbucket/*  ──►  Bitbucket Agent (~50 tools)
+                                └── Bitbucket Cloud REST API
+
+        Both agents share a single AWS Bedrock LLM (Claude Sonnet 4.6)
+        using the Observe → Think → Act orchestrator loop.
 ```
 
-### File Structure
+### Core AI Loop (shared by both agents)
+
+1. **Observe** — append user message to conversation history
+2. **Think** — send history to Claude via AWS Bedrock; LLM returns a `{"tool", "args"}` JSON block or a plain-text answer
+3. **Act** — execute the tool against ClickUp / Bitbucket API, feed result back
+4. **Repeat** — up to 12 iterations until a final answer is produced
+
+Sensitive operations (delete, approve, merge, decline) require explicit user confirmation.
+
+---
+
+## File Structure
 
 ```
-clickup_agent/
-├── main.py                        # Interactive CLI
-├── requirements.txt
-├── .env.example                   # Copy to .env and fill in values
+WorkSpace_Integration/
+├── backend/
+│   ├── main.py                       # ClickUp interactive CLI
+│   ├── server.py                     # FastAPI app (mounts both agent route groups)
+│   ├── requirements.txt
+│   ├── .env.example
+│   ├── config/
+│   │   └── settings.py               # Central env loading
+│   ├── agent/
+│   │   ├── llm.py                    # BedrockLLM wrapper (shared singleton)
+│   │   └── orchestrator.py           # ClickUp Observe→Think→Act loop
+│   ├── tools/                        # ClickUp tools (~30 modules)
+│   │   ├── __init__.py               # TOOL_REGISTRY
+│   │   ├── workspace_tools.py, task_tools.py, comment_tools.py,
+│   │   ├── dashboard_tools.py, search_tools.py, bulk_tools.py,
+│   │   ├── tag_tools.py, relation_tools.py, list_tools.py,
+│   │   ├── attachment_tools.py, time_tracking_tools.py,
+│   │   ├── status_time_tools.py, member_tools.py, chat_tools.py,
+│   │   ├── docs_tools.py, http.py, time_utils.py
+│   ├── bitbucket/                    # Bitbucket agent + tools (~50 modules)
+│   │   ├── bitbucket_agent.py        # Bitbucket Observe→Think→Act loop
+│   │   ├── bitbucket_routes.py       # /bitbucket/* FastAPI endpoints
+│   │   ├── bitbucket_http.py         # Shared HTTP + response normalizers
+│   │   ├── bitbucket_tools.py        # BITBUCKET_TOOL_REGISTRY
+│   │   ├── bitbucket_prompts.py      # Bitbucket system prompts
+│   │   ├── repos_tools.py, pr_tools.py, branch_tools.py,
+│   │   ├── pipeline_tools.py, deployment_tools.py,
+│   │   ├── webhook_tools.py, property_tools.py,
+│   │   ├── workspace_tools.py, live_dashboard.py,
+│   │   └── bitbucket_time_utils.py
+│   └── dashboard/
+│       └── live_dashboard.py         # Standalone dashboard CLI + snapshot
 │
-├── config/
-│   └── settings.py                # Loads .env, exposes constants
-│
-├── agent/
-│   ├── llm.py                     # BedrockLLM — all LLM calls go here
-│   └── orchestrator.py            # Observe→Think→Act loop
-│
-├── tools/
-│   ├── __init__.py                # TOOL_REGISTRY (19 tools)
-│   ├── workspace_tools.py         # Workspace / Space / Folder / List
-│   ├── task_tools.py              # Task CRUD + classifier
-│   ├── comment_tools.py           # Comments
-│   └── dashboard_tools.py        # Aggregation & rendering
-│
-└── dashboard/
-    └── live_dashboard.py          # Standalone dashboard CLI
+└── frontend/
+    ├── package.json
+    ├── vite.config.js                # Dev proxy /api & /bitbucket → :8000
+    └── src/
+        ├── main.jsx, App.jsx, Shell.jsx (hash router)
+        ├── api.js, bitbucketApi.js
+        ├── styles.css, bitbucket.css
+        ├── pages/
+        │   └── BitbucketDashboard.jsx
+        └── components/
+            ├── ChatBot.jsx, BitbucketChatBot.jsx
+            ├── TaskCard.jsx, TaskModal.jsx, Countdown.jsx, ConfirmModal.jsx
+            └── bb/ (Workspaces, Repos, Files, Branches, PullRequests,
+                     Pipelines, Deployments panels + FormModal + ui)
 ```
+
+---
+
+## Features
+
+### ClickUp Agent (~30 tools)
+
+- Workspace navigation & hierarchy (workspaces, spaces, folders, lists)
+- Task CRUD, bulk operations, custom fields, status updates
+- Search (by type, tag, keyword)
+- Comments, tags, task relationships & dependencies
+- Attachments, time tracking, time-in-status reporting
+- Member & assignee resolution
+- Chat channels & Docs (ClickUp v3 API)
+- Dashboard with summary stats, per-developer breakdown, overdue/due-soon alerts
+
+### Bitbucket Agent (~50 tools)
+
+- Workspaces & repositories (CRUD, default reviewers, collaborator invites)
+- Source code access (files, commits, branches, push)
+- Pull requests (diff, comments, tasks, approve / decline / merge, pending reviews)
+- Branches & branch permissions
+- Pipelines (list, run, steps, logs, automated failure analysis)
+- Deployments & environments (CRUD)
+- Webhooks & application properties
+- Live dashboard with PR review notifications & urgency highlighting
+
+### Web UI (React + Vite)
+
+- Hash-based navigation between ClickUp and Bitbucket dashboards
+- **ClickUp dashboard**: summary cards, overdue sidebar, due-in-5-min / due-next-24h, per-developer view, task modal, embedded chatbot
+- **Bitbucket dashboard**: tabbed panels (Overview, Workspaces, Repositories, Files, Branches, Pull Requests, Pipelines, Deployments), PR review notifications, commit feed, embedded chatbot
 
 ---
 
 ## Setup
 
-### 1. Install dependencies
+### Prerequisites
+
+- Python 3.13+
+- Node.js 18+
+- AWS account with Bedrock access (`Claude Sonnet` model enabled)
+- ClickUp API token
+- Bitbucket app credentials (token, client ID, client secret)
+
+### Backend
 
 ```bash
+cd backend
 pip install -r requirements.txt
-```
-
-### 2. Configure environment
-
-```bash
 cp .env.example .env
 ```
 
@@ -76,95 +148,78 @@ AWS_ACCESS_KEY=your_aws_access_key
 AWS_SECRET_KEY=your_aws_secret_key
 REGION=us-east-1
 AWS_BEDROCK_MODEL_ID=global.anthropic.claude-sonnet-4-6
+
+# Bitbucket
+BITBUCKET_API_TOKEN=your_bitbucket_token
+BITBUCKET_WORKSPACE=your_workspace
+BITBUCKET_CLIENT_ID=your_client_id
+BITBUCKET_CLIENT_SECRET=your_client_secret
 ```
 
-> Get your ClickUp token: **Settings → Apps → Generate Token**
+### Frontend
 
-### 3. Enable the Bedrock model in AWS
-
-Go to **AWS Console → Bedrock → Model Access** and enable `Claude Sonnet` for your region.
+```bash
+cd frontend
+npm install
+```
 
 ---
 
 ## Running
 
-### Interactive Agent
+Both servers must run concurrently — the Vite dev server proxies API requests to the FastAPI backend.
+
+### Backend
 
 ```bash
-python main.py
+cd backend
+uvicorn server:app --reload --port 8000
 ```
 
-Example prompts:
-```
-You: Show me all my workspaces
-You: What tasks are overdue right now?
-You: Create a task "Fix login bug" in list 901234567 assigned to user 12345, priority High
-You: Show me the full team dashboard
-You: What pending tasks does Alice have?
-```
-
-### Standalone Dashboard
+### Frontend
 
 ```bash
-python dashboard/live_dashboard.py
+cd frontend
+npm run dev        # http://localhost:5173
 ```
 
-Walks the entire workspace hierarchy, fetches all tasks, and prints:
-- Summary counts (total / completed / pending / overdue / due-soon)
-- Per-developer breakdown
-- Upcoming 24h deadlines
-- Overdue & 5-minute alerts
+### CLI alternatives
 
-Also writes `dashboard/dashboard_snapshot.json`.
+```bash
+# ClickUp interactive CLI
+python backend/main.py
+
+# Standalone dashboard
+python backend/dashboard/live_dashboard.py
+```
+
+### Build for production
+
+```bash
+cd frontend
+npm run build     # output in dist/
+npm run preview   # preview production build
+```
 
 ---
 
-## Tool Reference (19 tools)
+## Tech Stack
 
-| # | Tool | Module | Description |
-|---|------|--------|-------------|
-| 1 | `get_authorized_user` | workspace | Who is authenticated |
-| 2 | `get_workspaces` | workspace | All workspaces |
-| 3 | `get_spaces` | workspace | Spaces in a workspace |
-| 4 | `get_folders` | workspace | Folders in a space |
-| 5 | `get_lists` | workspace | Lists in a folder |
-| 6 | `get_folderless_lists` | workspace | Lists without a folder |
-| 7 | `get_workspace_members` | workspace | Members for assignment |
-| 8 | `get_tasks` | task | All tasks in a list |
-| 9 | `get_task` | task | Single task details |
-| 10 | `get_team_tasks` | task | Tasks across workspace |
-| 11 | `classify_tasks` | task | Completed/pending/overdue/due-soon |
-| 12 | `create_task` | task | Create a task (AI-driven) |
-| 13 | `update_task_status` | task | Change task status |
-| 14 | `update_task` | task | Generic task update |
-| 15 | `get_task_comments` | comment | Read task comments |
-| 16 | `post_task_comment` | comment | Post a comment |
-| 17 | `build_dashboard` | dashboard | Structured dashboard dict |
-| 18 | `render_dashboard_text` | dashboard | Human-readable report |
-| 19 | `get_team_tasks` *(alias)* | task | Workspace-wide task fetch |
-
----
-
-## How the Orchestrator Works
-
-The `Orchestrator` class runs a bounded loop (max 12 iterations):
-
-1. **Observe** — appends user message to conversation history
-2. **Think** — sends history to AWS Bedrock Claude; LLM decides what to do
-3. **Act** — if LLM returns a `{"tool": ..., "args": ...}` JSON block, the tool is executed and its result is fed back as the next message
-4. **Repeat** — until LLM returns a plain-text final answer
-
-```python
-from agent import Orchestrator
-
-agent = Orchestrator()
-print(agent.run("Show me the dashboard for workspace 90120456"))
-```
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, Vite 6, JSX, CSS |
+| Backend | Python 3.13, FastAPI, Uvicorn |
+| AI | AWS Bedrock (Claude Sonnet 4.6) |
+| ClickUp API | REST v2 / v3 |
+| Bitbucket API | REST v2 |
+| HTTP client | `requests` (Python) |
+| Build | Vite |
 
 ---
 
 ## Security Notes
 
-- Never commit `.env` — add it to `.gitignore`
+- Never commit `.env` — it is listed in `.gitignore`
 - Use AWS IAM roles with least-privilege Bedrock permissions in production
-- ClickUp token is a personal API token (`pk_...`) — treat it like a password
+- ClickUp token (`pk_...`) and Bitbucket credentials should be treated as passwords
+- Sensitive tool operations (delete, approve, merge, decline) require explicit user confirmation and refuse to self-confirm
