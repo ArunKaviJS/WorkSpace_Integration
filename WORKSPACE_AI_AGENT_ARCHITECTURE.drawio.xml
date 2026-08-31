@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="1SGETJjgy8hoig0JGxyE">
+    <mxGraphModel dx="2141" dy="803" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e7" edge="1" parent="1" source="response_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#fd79a8;strokeWidth=2;dashed=1;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="ui_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a1a2e;strokeColor=none;opacity=100;" value="" vertex="1">
+          <mxGeometry height="1100" width="1650" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font style=&quot;font-size: 22px; color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;WORKSPACE AI AGENT&amp;nbsp;&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="36" width="750" x="450" y="18" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font style=&#39;font-size:12px; color:#aaaaaa;&#39;&gt;User → Chat UI → AI Agent → Tools → ClickUp / Bitbucket → Response&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="750" x="450" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="user_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#4a90d9;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="200" width="140" x="40" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="user_icon" parent="1" style="image;html=1;aspect=fixed;image=https://app.diagrams.net/img/lib/mscae/Person.svg;strokeColor=none;fillColor=#4a90d9;" value="" vertex="1">
+          <mxGeometry height="100" width="74" x="71" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="user_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:13px;&#39;&gt;&lt;b&gt;Team Lead&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Types a natural&#xa;language request&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="140" x="40" y="548" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#7c4dff;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="360" width="160" x="250" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_label_top" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#7c4dff&#39; style=&#39;font-size:11px;&#39;&gt;&lt;b&gt;CHAT UI&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="160" x="250" y="346" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_chat_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Essentials-2480/003_-_Chat-1261.svg;" value="" vertex="1">
+          <mxGeometry height="44" width="44" x="308" y="372" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_chat_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;ClickUp Chat&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;POST /api/chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="160" x="250" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_divider" parent="1" style="line;strokeColor=#444466;html=1;" value="" vertex="1">
+          <mxGeometry height="10" width="120" x="270" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_bb_icon" parent="1" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.bitbucket_code_source;" value="" vertex="1">
+          <mxGeometry height="50" width="43" x="308" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_bb_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;Bitbucket Chat&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;POST /bitbucket/chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="160" x="250" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_dash_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#888888&#39; style=&#39;font-size:10px;&#39;&gt;+ Dashboards (no AI)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="160" x="250" y="598" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_proxy_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:9px;&#39;&gt;Vite proxy → :8000&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="160" x="250" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="server_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#00b894;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="260" width="160" x="490" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="server_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/assets/font-awesome/1/Server.svg;fillColor=#00b894;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="56" x="541" y="408" as="geometry" />
+        </mxCell>
+        <mxCell id="server_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#00b894&#39; style=&#39;font-size:11px;&#39;&gt;&lt;b&gt;FASTAPI SERVER&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;server.py&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Receives the message&#xa;Routes to the right agent&#xa;Returns reply + tool log&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="160" x="490" y="478" as="geometry" />
+        </mxCell>
+        <mxCell id="server_port" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:9px;&#39;&gt;port 8000 · CORS enabled&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="160" x="490" y="626" as="geometry" />
+        </mxCell>
+        <mxCell id="agent_section_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#f9ca24&#39; style=&#39;font-size:11px;&#39;&gt;&lt;b&gt;AI AGENT BRAIN&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="720" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="agent_bg" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#0d1117;strokeColor=#f9ca24;strokeWidth=2;dashed=0;" value="" vertex="1">
+          <mxGeometry height="840" width="330" x="720" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#1e2a1a;strokeColor=#55efc4;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="170" width="290" x="740" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_icon" parent="1" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;" value="" vertex="1">
+          <mxGeometry height="78" width="78" x="846" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#55efc4&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;Claude Sonnet 4.6&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:11px;&#39;&gt;via AWS Bedrock&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Reads message + history&#xa;Decides which tool to call&#xa;Generates final reply&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="290" x="740" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="loop_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#1a1a0d;strokeColor=#f9ca24;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="290" width="290" x="740" y="308" as="geometry" />
+        </mxCell>
+        <mxCell id="loop_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#f9ca24&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;OBSERVE → THINK → ACT  (max 12 rounds)&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="18" width="290" x="740" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="observe_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#4a90d9;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="64" width="258" x="756" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="observe_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/assets/flat-color-icons/1/Assistant.svg;" value="" vertex="1">
+          <mxGeometry height="44" width="44" x="762" y="348" as="geometry" />
+        </mxCell>
+        <mxCell id="observe_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#4a90d9&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;1. OBSERVE&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#cccccc&#39; style=&#39;font-size:10px;&#39;&gt;Read user message + full chat history&lt;/font&gt;" vertex="1">
+          <mxGeometry height="52" width="196" x="812" y="344" as="geometry" />
+        </mxCell>
+        <mxCell id="think_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#55efc4;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="64" width="258" x="756" y="418" as="geometry" />
+        </mxCell>
+        <mxCell id="think_icon" parent="1" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;fillColor=#3B8DF1;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.arrow_cycle;" value="" vertex="1">
+          <mxGeometry height="42" width="44" x="762" y="426" as="geometry" />
+        </mxCell>
+        <mxCell id="think_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#55efc4&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;2. THINK&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#cccccc&#39; style=&#39;font-size:10px;&#39;&gt;LLM decides: call a tool OR answer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="52" width="196" x="812" y="422" as="geometry" />
+        </mxCell>
+        <mxCell id="act_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#f9ca24;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="64" width="258" x="756" y="496" as="geometry" />
+        </mxCell>
+        <mxCell id="act_icon" parent="1" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#f9ca24;shadow=0;dashed=0;shape=mxgraph.ios7.icons.tools;pointerEvents=1;fillColor=#f9ca24;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="770" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="act_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#f9ca24&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;3. ACT&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#cccccc&#39; style=&#39;font-size:10px;&#39;&gt;Runs a tool → result back to LLM&lt;/font&gt;" vertex="1">
+          <mxGeometry height="52" width="196" x="812" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="loop_arrow_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#888888&#39; style=&#39;font-size:9px;&#39;&gt;← loops until plain-text answer or 12 rounds max&lt;/font&gt;" vertex="1">
+          <mxGeometry height="18" width="290" x="740" y="566" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#2d1515;strokeColor=#e17055;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry width="258" x="756" y="592" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_real_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#2d1515;strokeColor=#e17055;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry width="258" x="756" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#1a1630;strokeColor=#a29bfe;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="100" width="290" x="740" y="616" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#a29bfe&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;MEMORY (In-Session)&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#cccccc&#39; style=&#39;font-size:10px;&#39;&gt;Full conversation history kept in-memory&#xa;Sent to LLM every round so it remembers&#xa;Reset on demand · No database&lt;/font&gt;" vertex="1">
+          <mxGeometry height="84" width="290" x="740" y="624" as="geometry" />
+        </mxCell>
+        <mxCell id="gate2_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#2d1515;strokeColor=#e17055;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="90" width="290" x="740" y="732" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Bunch_of_Bluish_Icons-2402/alert-1276.png;" value="" vertex="1">
+          <mxGeometry height="48" width="48" x="750" y="742" as="geometry" />
+        </mxCell>
+        <mxCell id="gate_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#e17055&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;HUMAN GATE&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#cccccc&#39; style=&#39;font-size:10px;&#39;&gt;Destructive actions pause&#xa;and ask user to confirm first&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="220" x="804" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="agent_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#f9ca24&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;AGENT picks the right tool automatically&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="18" width="290" x="740" y="836" as="geometry" />
+        </mxCell>
+        <mxCell id="tools_bg" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#0f1923;strokeColor=#0984e3;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="68" width="290" x="740" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="tools_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#74b9ff&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;59 ClickUp tools  ·  64 Bitbucket tools&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;tasks · comments · PRs · pipelines · branches · docs&lt;/font&gt;" vertex="1">
+          <mxGeometry height="52" width="290" x="740" y="868" as="geometry" />
+        </mxCell>
+        <mxCell id="cu_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#1a2516;strokeColor=#6ab04c;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="260" width="160" x="1130" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cu_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Perqui-2061/task_manager-972.png;" value="" vertex="1">
+          <mxGeometry height="58" width="58" x="1181" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="cu_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#6ab04c&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;ClickUp&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:11px;&#39;&gt;Task Management&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;api.clickup.com/api/v2&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="160" x="1130" y="282" as="geometry" />
+        </mxCell>
+        <mxCell id="cu_ops" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Create / update tasks&#xa;Set priorities &amp; due dates&#xa;Post comments&#xa;Track time · Add tags&#xa;Manage docs &amp; chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="104" width="160" x="1130" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="bb_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#151a25;strokeColor=#00b0ff;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="260" width="160" x="1130" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="bb_icon" parent="1" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.bitbucket_code_source;" value="" vertex="1">
+          <mxGeometry height="50" width="43" x="1189" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="bb_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#00b0ff&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;Bitbucket&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:11px;&#39;&gt;Source Control&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;api.bitbucket.org/2.0&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="160" x="1130" y="574" as="geometry" />
+        </mxCell>
+        <mxCell id="bb_ops" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Review pull requests&#xa;Run pipelines&#xa;Create branches&#xa;Manage deployments&#xa;Inspect build failures&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="160" x="1130" y="634" as="geometry" />
+        </mxCell>
+        <mxCell id="response_box" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#16213e;strokeColor=#fd79a8;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="280" width="180" x="1380" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="resp_icon" parent="1" style="shape=image;html=1;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/assets/font-awesome/1/Robot.svg;fillColor=#fd79a8;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="80" x="1430" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="resp_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#fd79a8&#39; style=&#39;font-size:11px;&#39;&gt;&lt;b&gt;AI REPLY&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#ffffff&#39; style=&#39;font-size:12px;&#39;&gt;&lt;b&gt;Shown in Chat&lt;/b&gt;&lt;/font&gt;&#xa;&lt;font color=&#39;#aaaaaa&#39; style=&#39;font-size:10px;&#39;&gt;Natural language answer&#xa;based on real live data&#xa;fetched from ClickUp or&#xa;Bitbucket by the agent&lt;/font&gt;" vertex="1">
+          <mxGeometry height="130" width="180" x="1380" y="466" as="geometry" />
+        </mxCell>
+        <mxCell id="resp_log_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:9px;&#39;&gt;+ tool call log returned&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="180" x="1380" y="628" as="geometry" />
+        </mxCell>
+        <mxCell id="step1_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;① types message&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="155" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#4a90d9;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="ui_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step2_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;② HTTP POST&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="72" x="416" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ui_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7c4dff;strokeWidth=2;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="server_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step3_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;③ routes to agent&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="62" x="655" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="server_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00b894;strokeWidth=2;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="agent_bg" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step4_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;④ calls live API&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="62" x="1064" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="e4a" edge="1" parent="1" source="agent_bg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6ab04c;strokeWidth=2;orthogonalLoop=1;jettySize=auto;startArrow=classic;startFill=1;" target="cu_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1079" y="516" />
+              <mxPoint x="1079" y="484" />
+              <mxPoint x="1210" y="484" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4b" edge="1" parent="1" source="agent_bg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00b0ff;strokeWidth=2;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="bb_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1073" y="524" />
+              <mxPoint x="1073" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step5a_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;⑤ result&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="50" x="1300" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e5a" edge="1" parent="1" source="cu_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6ab04c;strokeWidth=2;dashed=1;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="agent_bg" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="477" />
+              <mxPoint x="1065" y="477" />
+              <mxPoint x="1065" y="524" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5b" edge="1" parent="1" source="bb_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#00b0ff;strokeWidth=2;dashed=1;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="agent_bg" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1087" y="630" />
+              <mxPoint x="1087" y="524" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step6_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;⑥ final answer&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="76" x="1300" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="server_box" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#fd79a8;strokeWidth=2;libavoidRouting=1;orthogonalLoop=1;jettySize=auto;" target="response_box" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step7_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;⑦ displayed&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="80" x="1380" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_bg2" parent="1" style="rounded=2;whiteSpace=wrap;html=1;fillColor=#0d0d1a;strokeColor=#333355;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="130" width="590" x="40" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#888899&#39; style=&#39;font-size:10px;&#39;&gt;&lt;b&gt;HOW THE AGENT CHOOSES A TOOL&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="16" width="300" x="52" y="688" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_text" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;" value="&lt;font color=&#39;#888899&#39; style=&#39;font-size:10px;&#39;&gt;The LLM reads all 59 ClickUp tools (or 64 Bitbucket tools) described in its system prompt.&#xa;It picks which tool to call based on the user&#39;s request — no hardcoded routing.&#xa;Tool results feed back into the LLM, which may call more tools before answering.&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="566" x="52" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="note_cu" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:9px;&#39;&gt;ClickUp agent selected&#xa;when user goes to&#xa;ClickUp chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="1130" y="124" as="geometry" />
+        </mxCell>
+        <mxCell id="note_bb" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="&lt;font color=&#39;#555577&#39; style=&#39;font-size:9px;&#39;&gt;Bitbucket agent selected&#xa;when user goes to&#xa;Bitbucket chat&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="1130" y="780" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
