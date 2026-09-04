@@ -40,3 +40,9 @@ BITBUCKET_AUTH = _bitbucket_auth()
 BITBUCKET_HEADERS = {
     "Content-Type": "application/json",
 }
+
+# GitLab (python-gitlab — personal access token auth).
+# Optional: the GitLab tab stays dormant until these are set, and the rest of
+# the app keeps working without them.
+GITLAB_URL: str   = os.environ.get("GITLAB_URL", "https://gitlab.com")
+GITLAB_TOKEN: str = os.environ.get("GITLAB_TOKEN", "")

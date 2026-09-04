@@ -22,6 +22,7 @@ from pydantic import BaseModel
 
 from agent.orchestrator import Orchestrator
 from bitbucket.bitbucket_routes import router as bitbucket_router
+from gitlab_int.gitlab_routes import router as gitlab_router
 from dashboard.live_dashboard import gather_all_tasks
 from tools.dashboard_tools import build_dashboard, render_dashboard_text
 from tools.task_tools import classify_tasks
@@ -43,6 +44,9 @@ orch = Orchestrator()
 
 # Bitbucket routes (separate module — mounted alongside ClickUp routes)
 app.include_router(bitbucket_router)
+
+# GitLab routes (separate module — mounted alongside ClickUp & Bitbucket routes)
+app.include_router(gitlab_router)
 
 
 # ---------------------------------------------------------------------------

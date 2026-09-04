@@ -1,0 +1,82 @@
+/* ── GitLab tab — extends bitbucket.css / styles.css ─────────────── */
+
+.gl-dashboard { --gl-accent: #fc6d26; }
+
+/* GitLab chat FAB uses the GitLab orange */
+.chat-fab.gl-fab { background: var(--gl-accent); }
+
+/* "AI Review" button */
+.btn-review {
+  background: #1f2b4d; color: #fff;
+  border: 1px solid #2d3d6b;
+}
+.btn-review:hover:not(:disabled) { filter: brightness(1.15); }
+
+/* MR notification inline action cluster */
+.gl-notif-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+
+/* ── AI review modal ────────────────────────────────────────────── */
+.gl-review-modal { max-width: 760px; width: 92%; }
+.gl-review-target {
+  font-weight: 600; font-size: 0.9rem; color: var(--text-dim);
+  margin: 0 0 12px; word-break: break-word;
+}
+
+.gl-verdict-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+}
+.gl-verdict-badge {
+  font-weight: 800; font-size: 0.8rem; letter-spacing: 0.04em;
+  padding: 6px 14px; border-radius: 999px; color: #fff;
+}
+.gl-verdict-good  { background: var(--green, #2e9e5b); }
+.gl-verdict-check { background: #c9820a; }
+.gl-verdict-bad   { background: var(--red, #e04050); }
+
+.gl-risk-badge {
+  font-weight: 700; font-size: 0.74rem; padding: 4px 10px; border-radius: 999px;
+}
+.gl-risk-low    { background: #e2f6ec; color: #2e9e5b; }
+.gl-risk-medium { background: #fdf0da; color: #a06b10; }
+.gl-risk-high   { background: #fde1e4; color: #e04050; }
+
+.gl-risk-score { font-size: 0.8rem; color: var(--text-dim); }
+.gl-reco { font-size: 0.8rem; font-weight: 700; color: var(--text); text-transform: capitalize; }
+
+.gl-risk-meter {
+  height: 10px; border-radius: 999px; background: #edf0f4;
+  overflow: hidden; margin: 4px 0 16px;
+}
+.gl-risk-meter-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+.gl-risk-meter-fill.gl-risk-low    { background: #2e9e5b; }
+.gl-risk-meter-fill.gl-risk-medium { background: #d9971f; }
+.gl-risk-meter-fill.gl-risk-high   { background: #e04050; }
+
+.gl-review-summary {
+  font-size: 0.92rem; line-height: 1.55; color: var(--text);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; margin: 0 0 6px;
+}
+
+/* findings */
+.gl-finding { align-items: flex-start; }
+.gl-finding-body { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.gl-finding-title { font-weight: 700; font-size: 0.86rem; }
+.gl-finding-file { font-size: 0.74rem; color: var(--text-dim); }
+.gl-finding-detail { font-size: 0.83rem; color: var(--text); line-height: 1.5; }
+
+.gl-sev {
+  flex: 0 0 auto; text-transform: uppercase; font-weight: 800;
+  font-size: 0.64rem; letter-spacing: 0.05em;
+  padding: 3px 8px; border-radius: 6px; margin-top: 2px;
+}
+.gl-sev-high   { background: #fde1e4; color: #c0293c; }
+.gl-sev-medium { background: #fdf0da; color: #a06b10; }
+.gl-sev-low    { background: #e4ecff; color: #3b5ccc; }
+
+.gl-good-list { margin: 6px 0 0; padding-left: 4px; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.gl-good-list li { font-size: 0.85rem; color: var(--text); }
+
+@media (max-width: 900px) {
+  .gl-notif-actions { justify-content: flex-start; }
+}
